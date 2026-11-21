@@ -46,7 +46,7 @@ export default function Cinta({ m, ultimo }) {
         <div className={filaCls}>
           {original.map((s, i) => (
             <div key={i} className={`celda original ${s === BLANCO ? 'blanco' : ''} ${i === m.cabezal ? 'foco' : ''}`}
-              style={{ '--c': 'min(9.4cqw, 8.2vh, 112px)', height: 'min(5.6vh, 64px)', fontSize: 'min(3.6vh, 40px)' }}>{s}</div>
+              style={{ '--c': 'min(9.4cqw, 7.6vh, 112px)', height: 'min(5vh, 60px)', fontSize: 'min(3.6vh, 40px)' }}>{s}</div>
           ))}
         </div>
       </div>
@@ -56,7 +56,7 @@ export default function Cinta({ m, ultimo }) {
         <div className="font-mono text-[clamp(12px,.95vw,15px)] font-bold text-cabezal">pos {m.cabezal}<br />lee «{m.leer()}»</div>
       </div>
       <div className="@container">
-        <div className="relative mx-auto w-max pb-[clamp(16px,2.4vh,24px)]" style={{ '--c': 'min(9.4cqw, 8.2vh, 112px)' }}>
+        <div className="relative mx-auto w-max pb-[clamp(16px,2.4vh,24px)]" style={{ '--c': 'min(9.4cqw, 7.6vh, 112px)' }}>
           <div ref={fila} className={filaCls}>
             {m.cinta.map((s, i) => {
               const c = ['celda'];

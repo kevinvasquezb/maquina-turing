@@ -14,9 +14,9 @@ function pantallaCompleta() {
 
 export default function Cabecera({ vista, setVista, sonidoOn, setSonidoOn }) {
   return (
-    <header className="flex h-[64px] shrink-0 items-center justify-between gap-4 bg-noche px-5 text-white">
+    <header className="flex h-[54px] shrink-0 items-center justify-between gap-4 bg-noche px-5 text-white">
       <button onClick={() => setVista('inicio')} className="flex items-center gap-3 text-left">
-        <span className="grid h-11 w-11 place-items-center rounded-xl bg-activo font-serif text-[28px] font-bold text-noche">δ</span>
+        <span className="grid h-10 w-10 place-items-center rounded-xl bg-activo font-serif text-[26px] font-bold text-noche">δ</span>
         <span className="leading-tight">
           <span className="block text-[clamp(16px,1.5vw,22px)] font-bold">Máquina de Turing</span>
           <span className="block text-[13px] font-medium text-slate-300">Descifrador César −3 · UTEPSA</span>

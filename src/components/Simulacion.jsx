@@ -5,6 +5,7 @@ import Grafo from './Grafo.jsx';
 import Cinta, { Leyenda } from './Cinta.jsx';
 import Narracion from './Narracion.jsx';
 import Historial, { TablaDelta } from './Historial.jsx';
+import AlfabetoUsado, { LeyendaAlfabeto } from './AlfabetoUsado.jsx';
 import { sonido } from '../core/sonido.js';
 
 const VELOCIDADES = [1500, 1000, 650, 380, 180];
@@ -75,6 +76,7 @@ export default function Simulacion({ maquina, sonidoOn, pasoInicial, onCambiarPa
     <div className="grid h-full grid-rows-[auto_minmax(0,1fr)] gap-[1.4vh] p-[clamp(8px,1.4vh,18px)]">
       {/* ===== Barra superior ===== */}
       <div className="tarjeta flex flex-wrap items-center gap-x-[clamp(8px,1.4vw,20px)] gap-y-2 px-4 py-2">
+        <div className="flex flex-1 flex-wrap items-center gap-x-[clamp(8px,1.4vw,20px)] gap-y-2">
         <div className="flex items-center gap-3">
           <div>
             <div className="text-[11px] font-bold uppercase leading-none tracking-wide text-gris">Palabra cifrada</div>
@@ -85,15 +87,16 @@ export default function Simulacion({ maquina, sonidoOn, pasoInicial, onCambiarPa
           <button onClick={onCambiarPalabra} title="Cambiar palabra" className="rounded-lg border-2 border-slate-400 px-2 py-1 text-sm font-bold text-gris hover:border-tinta hover:text-tinta">✎<span className="max-[1250px]:hidden"> cambiar</span></button>
         </div>
 
-        <div className="min-w-[90px] flex-1">
-          <div className="flex items-baseline justify-between font-mono font-extrabold">
-            <span className="text-[12px] uppercase tracking-wide text-gris">Paso</span>
-            <span className="text-[clamp(20px,3vh,30px)] text-cabezal">{String(n).padStart(2, '0')} / {String(total).padStart(2, '0')}</span>
-          </div>
-          <div className="mt-1 h-3 overflow-hidden rounded-full bg-slate-200">
-            <motion.div className="h-full rounded-full bg-gradient-to-r from-cabezal to-listo"
-              animate={{ width: `${(100 * n) / total}%` }} transition={{ type: 'spring', stiffness: 120, damping: 20 }} />
-          </div>
+        <div className="flex flex-col items-center rounded-xl bg-cabezal-claro px-2.5 py-1 font-mono font-extrabold leading-none text-cabezal" title="Transiciones ejecutadas">
+          <span className="text-[10px] uppercase tracking-wide">Paso</span>
+          <span className="text-[clamp(16px,2.3vh,22px)]">{String(n).padStart(2, '0')}/{String(total).padStart(2, '0')}</span>
+        </div>
+
+        {/* letras del alfabeto que se usan para descifrar */}
+        </div>
+        <div className="order-last flex basis-full items-center gap-3 border-t-2 border-slate-200 pt-2">
+          <LeyendaAlfabeto />
+          <AlfabetoUsado m={m} ultimo={ultimo} />
         </div>
 
         {/* selector de modo */}
