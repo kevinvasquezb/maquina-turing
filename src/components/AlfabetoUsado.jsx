@@ -42,16 +42,3 @@ export default function AlfabetoUsado({ m, ultimo }) {
     </div>
   );
 }
-
-export function LeyendaAlfabeto() {
-  const it = (cls, txt) => (
-    <span className="flex items-center gap-1"><i className={`inline-block h-3.5 w-3.5 rounded border-[3px] ${cls}`} />{txt}</span>
-  );
-  return (
-    <div className="flex shrink-0 flex-col gap-0.5 text-[clamp(12px,1.5vh,15px)] font-bold leading-tight text-gris">
-      {it('border-tinta', 'cifrada')}
-      {it('border-listo bg-listo-claro', 'descifrada')}
-      {it('border-escritura bg-escritura', 'escribe ahora')}
-    </div>
-  );
-}

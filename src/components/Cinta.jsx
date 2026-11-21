@@ -40,36 +40,33 @@ export default function Cinta({ m, ultimo }) {
     <div className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-x-4 gap-y-[1vh]">
       <div className="text-right leading-tight">
         <div className="text-[clamp(14px,1.15vw,18px)] font-extrabold uppercase text-gris">Original</div>
-        <div className="text-[clamp(12px,.95vw,15px)] font-semibold text-linea">no cambia</div>
       </div>
       <div className="@container">
         <div className={filaCls}>
           {original.map((s, i) => (
             <div key={i} className={`celda original ${s === BLANCO ? 'blanco' : ''} ${i === m.cabezal ? 'foco' : ''}`}
-              style={{ '--c': 'min(9.4cqw, 7.6vh, 112px)', height: 'min(5vh, 60px)', fontSize: 'min(3.6vh, 40px)' }}>{s}</div>
+              style={{ '--c': 'min(9.4cqw, 9.6vh, 124px)', height: 'min(5.8vh, 66px)', fontSize: 'min(4vh, 44px)' }}>{s}</div>
           ))}
         </div>
       </div>
 
-      <div className="self-start pt-[2vh] text-right leading-tight">
+      <div className="text-right leading-tight">
         <div className="text-[clamp(14px,1.15vw,18px)] font-extrabold uppercase text-gris">Trabajo</div>
-        <div className="font-mono text-[clamp(12px,.95vw,15px)] font-bold text-cabezal">pos {m.cabezal}<br />lee «{m.leer()}»</div>
       </div>
       <div className="@container">
-        <div className="relative mx-auto w-max pb-[clamp(16px,2.4vh,24px)]" style={{ '--c': 'min(9.4cqw, 7.6vh, 112px)' }}>
+        <div className="relative mx-auto w-max pb-[clamp(16px,2.4vh,24px)]" style={{ '--c': 'min(9.4cqw, 9.6vh, 124px)' }}>
           <div ref={fila} className={filaCls}>
             {m.cinta.map((s, i) => {
               const c = ['celda'];
               if (s === BLANCO) c.push('blanco');
               if (terminadas.has(i)) c.push('terminada');
-              if (ultimo && ultimo.posicion === i) c.push(ultimo.lee !== ultimo.escribe ? 'escrita' : 'leida');
+              if (ultimo && ultimo.posicion === i && ultimo.lee !== ultimo.escribe) c.push('escrita');
               const final = m.aceptada && s !== BLANCO;
               return (
                 <motion.div key={i} className={c.join(' ')}
                   animate={final ? { y: [0, -14, 0] } : { y: 0 }}
                   transition={final ? { delay: i * .07, duration: .5 } : { duration: .2 }}>
                   <Simbolo s={s} />
-                  <span className="idx">{i}</span>
                 </motion.div>
               );
             })}
@@ -101,7 +98,6 @@ export function Leyenda() {
       {it('border-escritura bg-escritura-claro', 'Escritura')}
       {it('border-cabezal', 'Cabezal')}
       {it('border-listo bg-listo-claro', 'Terminada')}
-      {it('border-indigo-400 bg-indigo-50', 'Leída')}
     </div>
   );
 }

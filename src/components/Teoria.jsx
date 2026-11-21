@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { REGLAS } from '../core/maquina.js';
 
 const Tarjeta = ({ titulo, children, i }) => (
   <motion.section initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * .08 }}
@@ -15,6 +16,15 @@ export default function Teoria() {
   return (
     <div className="h-full overflow-auto p-[clamp(10px,2vh,24px)]">
       <div className="mx-auto grid max-w-[1400px] gap-4 md:grid-cols-2">
+        <Tarjeta titulo="Función de transición δ" i={0}>
+          <table className="tabla">
+            <thead><tr><th>Regla</th><th>Estado</th><th>Lee</th><th>Escribe</th><th>Mueve</th><th>Siguiente</th></tr></thead>
+            <tbody>{REGLAS.map((r) => (
+              <tr key={r.id}><td>{r.id}</td><td>{r.estado}</td><td>{r.lee}</td><td>{r.escribe}</td><td>{r.mueve}</td><td>{r.siguiente}</td></tr>
+            ))}</tbody>
+          </table>
+          <p className="mt-2 text-gris">prev(x) = letra anterior en el alfabeto circular · prev²(x) = dos anteriores</p>
+        </Tarjeta>
         <Tarjeta titulo="Definición formal" i={0}>
           <Formula>M = (Q, Σ, Γ, δ, q0, □, F)</Formula>
           <ul className="list-disc pl-6">

@@ -4,8 +4,8 @@ import confetti from 'canvas-confetti';
 import Grafo from './Grafo.jsx';
 import Cinta, { Leyenda } from './Cinta.jsx';
 import Narracion from './Narracion.jsx';
-import Historial, { TablaDelta } from './Historial.jsx';
-import AlfabetoUsado, { LeyendaAlfabeto } from './AlfabetoUsado.jsx';
+import Historial from './Historial.jsx';
+import AlfabetoUsado from './AlfabetoUsado.jsx';
 import { sonido } from '../core/sonido.js';
 
 const VELOCIDADES = [1500, 1000, 650, 380, 180];
@@ -81,7 +81,7 @@ export default function Simulacion({ maquina, sonidoOn, pasoInicial, onCambiarPa
           <div>
             <div className="text-[11px] font-bold uppercase leading-none tracking-wide text-gris">Palabra cifrada</div>
             <div className="font-mono text-[clamp(22px,3.4vh,36px)] font-extrabold leading-none tracking-[.12em]">
-              {m.entrada}{m.aceptada && <span className="text-listo"> → {m.resultado()}</span>}
+              {m.entrada}
             </div>
           </div>
           <button onClick={onCambiarPalabra} title="Cambiar palabra" className="rounded-lg border-2 border-slate-400 px-2 py-1 text-sm font-bold text-gris hover:border-tinta hover:text-tinta">✎<span className="max-[1250px]:hidden"> cambiar</span></button>
@@ -95,7 +95,6 @@ export default function Simulacion({ maquina, sonidoOn, pasoInicial, onCambiarPa
         {/* letras del alfabeto que se usan para descifrar */}
         </div>
         <div className="order-last flex basis-full items-center gap-3 border-t-2 border-slate-200 pt-2">
-          <LeyendaAlfabeto />
           <AlfabetoUsado m={m} ultimo={ultimo} />
         </div>
 
@@ -132,10 +131,10 @@ export default function Simulacion({ maquina, sonidoOn, pasoInicial, onCambiarPa
       </div>
 
       {/* ===== Cuerpo ===== */}
-      <div className="grid min-h-0 grid-cols-[minmax(0,1fr)_clamp(330px,31vw,560px)] gap-[1.4vh]">
+      <div className="grid min-h-0 grid-cols-[minmax(0,1fr)_clamp(300px,27vw,480px)] gap-[1.4vh]">
         <div className="grid min-h-0 grid-rows-[minmax(170px,1fr)_auto_auto] gap-[1.4vh]">
           <section className="tarjeta flex min-h-0 flex-col px-4 pb-1 pt-2">
-            <span className="titulo-tarjeta"><span className="chip-num">1</span>Grafo · estado y transición activa</span>
+            <span className="titulo-tarjeta">Grafo</span>
             <div className="min-h-0 flex-1">
               <Grafo estado={m.estado} ultimaRegla={ultimo?.regla} proximaRegla={m.proximaRegla()?.id} pulso={pulso} aceptada={m.aceptada} />
             </div>
@@ -143,7 +142,7 @@ export default function Simulacion({ maquina, sonidoOn, pasoInicial, onCambiarPa
 
           <section className="tarjeta px-4 pb-2.5 pt-2.5">
             <div className="mb-1.5 flex flex-wrap items-center justify-between gap-2">
-              <span className="titulo-tarjeta"><span className="chip-num">2</span>Cintas y cabezal</span>
+              <span className="titulo-tarjeta">Cintas</span>
               <Leyenda />
             </div>
             <Cinta m={m} ultimo={ultimo} />
@@ -154,11 +153,7 @@ export default function Simulacion({ maquina, sonidoOn, pasoInicial, onCambiarPa
           </section>
         </div>
 
-        <aside className="tarjeta flex min-h-0 flex-col gap-3 px-3.5 py-3">
-          <div>
-            <span className="titulo-tarjeta mb-2"><span className="chip-num">δ</span>Función de transición</span>
-            <TablaDelta m={m} ultimo={ultimo} />
-          </div>
+        <aside className="tarjeta flex min-h-0 flex-col px-3.5 py-3">
           <Historial m={m} total={total} onIr={(p) => { setReproduciendo(false); irA(p); }} />
         </aside>
       </div>
